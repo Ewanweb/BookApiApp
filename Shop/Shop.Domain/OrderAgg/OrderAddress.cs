@@ -4,19 +4,6 @@ namespace Shop.Domain.OrderAgg
 {
     public class OrderAddress : BaseEntity
     {
-        public OrderAddress(long orderId, string shire, string city, string postalCode, string postalAddress, string phoneNumber, string name, string family, string nationalCode)
-        {
-            OrderId = orderId;
-            Shire = shire;
-            City = city;
-            PostalCode = postalCode;
-            PostalAddress = postalAddress;
-            PhoneNumber = phoneNumber;
-            Name = name;
-            Family = family;
-            NationalCode = nationalCode;
-        }
-
         public long OrderId { get; internal set; }
         public string Shire { get; private set; }
         public string City { get; private set; }
@@ -29,6 +16,19 @@ namespace Shop.Domain.OrderAgg
         public Order Order { get; set; }
         
 
+        public OrderAddress(long orderId, string shire, string city, string postalCode, string postalAddress, string phoneNumber, string name, string family, string nationalCode, Order order)
+        {
+            OrderId = orderId;
+            Shire = shire;
+            City = city;
+            PostalCode = postalCode;
+            PostalAddress = postalAddress;
+            PhoneNumber = phoneNumber;
+            Name = name;
+            Family = family;
+            NationalCode = nationalCode;
+            Order = order;
+        }
     }
 
 }
