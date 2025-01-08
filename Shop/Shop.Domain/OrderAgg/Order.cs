@@ -52,20 +52,54 @@ namespace Shop.Domain.OrderAgg
 
         public void AddItem(OrderItem item) 
         {
+            ChangeOrderGuard();
+
+            var oldItem = Items.FirstOrDefault(f => f.InventoryId == item.InventoryId);
+
+            if(oldItem != null)
+                oldItem.ChangeCount(item.Count + oldItem.Count);
+
             Items.Add(item);
         }
 
         public void RemoveItem(long itemId) 
         {
+            ChangeOrderGuard();
+
             var currentItem = Items.FirstOrDefault(f => f.Id == itemId);
 
             if (currentItem != null) 
                 Items.Remove(currentItem);
         }
 
+        public void IncreaseItemCount(long itemId, int count)
+        {
+            ChangeOrderGuard();
+            var currentItem = Items.FirstOrDefault(f => f.Id == itemId);
+
+            if(currentItem == null)
+                throw new NullOrEmptyDomainDataException();
+            
+            currentItem.IncreaseCount(count);
+
+        }
+
+        public void DecreaseItemCount(long itemId, int count)
+        {
+            ChangeOrderGuard();
+            var currentItem = Items.FirstOrDefault(f => f.Id == itemId);
+
+            if(currentItem == null)
+                throw new NullOrEmptyDomainDataException();
+            
+            currentItem.DecreaseCount(count);
+
+        }
 
         public void ChangeCountItem(long itemId, int newCount)
         {
+            ChangeOrderGuard();
+
             var currentItem = Items.FirstOrDefault(f => f.Id == itemId);
 
             if (currentItem == null)
@@ -84,7 +118,15 @@ namespace Shop.Domain.OrderAgg
 
         public void CheckOut(OrderAddress orderAddress)
         {
+            ChangeOrderGuard();
+
             Address = orderAddress;
+        }
+
+        public void ChangeOrderGuard()
+        {
+            if (Status != OrderStatus.Pending)
+                throw new InvalidDomainDataException("امکان ویرایش این سفارش وجود ندارد");
         }
     }
 

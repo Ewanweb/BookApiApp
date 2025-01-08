@@ -13,12 +13,10 @@ namespace Shop.Domain.OrderAgg
         public string Name { get; private set; }
         public string Family { get; private set; }
         public string NationalCode { get; private set; }
-        public Order Order { get; set; }
         
 
-        public OrderAddress(long orderId, string shire, string city, string postalCode, string postalAddress, string phoneNumber, string name, string family, string nationalCode, Order order)
+        public OrderAddress(string shire, string city, string postalCode, string postalAddress, string phoneNumber, string name, string family, string nationalCode)
         {
-            OrderId = orderId;
             Shire = shire;
             City = city;
             PostalCode = postalCode;
@@ -27,7 +25,6 @@ namespace Shop.Domain.OrderAgg
             Name = name;
             Family = family;
             NationalCode = nationalCode;
-            Order = order;
         }
     }
 
