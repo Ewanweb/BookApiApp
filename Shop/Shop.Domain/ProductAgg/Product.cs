@@ -15,6 +15,7 @@ namespace Shop.Domain.ProductAgg
         public string ImageName { get; private set; }
         public string Description { get; private set; }
         public long CategoryId { get; private set; }
+        public long SubCategoryId { get; private set; }
         public long SecondorySubCategoryId { get; private set; }
         public string Slug { get; private set; }
         public SeoData SeoData { get; private set; }
@@ -26,34 +27,39 @@ namespace Shop.Domain.ProductAgg
         {
             
         }
-        public Product(string title, string imageName, string description, long categoryId, long secondorySubCategoryId,
-         string slug, SeoData seoData, IProductDomainService productDomainService)
-        {
-            Guard(title,imageName,description,slug,productDomainService);
 
+        public Product(string title, string description, long categoryId,
+         long subCategoryId, long secondorySubCategoryId, IProductDomainService domainService, string slug, SeoData seoData)
+        {
+            Guard(title, slug, description, domainService);
             Title = title;
-            ImageName = imageName;
             Description = description;
             CategoryId = categoryId;
+            SubCategoryId = subCategoryId;
+            SecondorySubCategoryId = secondorySubCategoryId;
+            Slug = slug;
+            SeoData = seoData;
+
+        }
+
+        public void Edit(string title, string description, long categoryId, long subCategoryId, long secondorySubCategoryId,
+         string slug, SeoData seoData, IProductDomainService productDomainService)
+        {
+            Guard(title,description,slug,productDomainService);
+            Title = title;
+            Description = description;
+            CategoryId = categoryId;
+            SubCategoryId = subCategoryId;
             SecondorySubCategoryId = secondorySubCategoryId;
             Slug = slug.ToSlug();
             SeoData = seoData;
         }
 
-
-        public void Edit(string title, string imageName, string description, long categoryId, long secondorySubCategoryId,
-         string slug, SeoData seoData, IProductDomainService productDomainService)
+        public void SetProductImage(string imageName)
         {
-            Guard(title,imageName,description,slug,productDomainService);
-            Title = title;
+            NullOrEmptyDomainDataException.CheckString(imageName, nameof(imageName));
             ImageName = imageName;
-            Description = description;
-            CategoryId = categoryId;
-            SecondorySubCategoryId = secondorySubCategoryId;
-            Slug = slug.ToSlug();
-            SeoData = seoData;
         }
-
 
         public void AddImage(ProductImage image)
         {
@@ -77,10 +83,9 @@ namespace Shop.Domain.ProductAgg
             Specification = specification;
         }
 
-        public void Guard(string title, string imageName,string slug,string description, IProductDomainService productDomainService)
+        public void Guard(string title, string slug, string description, IProductDomainService productDomainService)
         {
             NullOrEmptyDomainDataException.CheckString(title, nameof(title));
-            NullOrEmptyDomainDataException.CheckString(imageName, nameof(imageName));
             NullOrEmptyDomainDataException.CheckString(description, nameof(description));
             NullOrEmptyDomainDataException.CheckString(slug, nameof(slug));
 
