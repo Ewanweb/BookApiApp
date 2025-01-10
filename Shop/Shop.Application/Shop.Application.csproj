@@ -25,4 +25,11 @@
     <ProjectReference Include="..\Shop.Domain\Shop.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Sellers\AddInventory\" />
+    <Folder Include="Sellers\ChangeStatus\" />
+    <Folder Include="Sellers\DeleteInventory\" />
+    <Folder Include="Sellers\EditInventory\" />
+  </ItemGroup>
+
 </Project>
