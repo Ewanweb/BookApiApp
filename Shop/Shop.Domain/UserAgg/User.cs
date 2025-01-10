@@ -96,7 +96,7 @@ namespace Shop.Domain.UserAgg
         }
 
 
-        public void Guard(string phoneNumber, string email, IDomainUserservice domainservice)
+        private void Guard(string phoneNumber, string email, IDomainUserservice domainservice)
         {
             NullOrEmptyDomainDataException.CheckString(phoneNumber, nameof(phoneNumber));
             NullOrEmptyDomainDataException.CheckString(email, nameof(email));

@@ -7,20 +7,20 @@ using Shop.Domain.ProductAgg.Services;
 
 namespace Shop.Application.Products.Create
 {
-    internal class CreateProductCommandHandler : IBaseCommandHandler<CreateProductCommand>
+    internal class RemoveProductImageCommandHandler : IBaseCommandHandler<AddProductImageCommand>
     {
         private readonly IProductDomainService _domainService;
         private readonly IProductRepository _repository;
         private readonly IFileService _fileService;
     
-        public CreateProductCommandHandler(IProductDomainService domainService, IProductRepository repository, IFileService fileService)
+        public RemoveProductImageCommandHandler(IProductDomainService domainService, IProductRepository repository, IFileService fileService)
         {
             _domainService = domainService;
             _repository = repository;
             _fileService = fileService;
         }
 
-        public async Task<OperationResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult> Handle(AddProductImageCommand request, CancellationToken cancellationToken)
         {
             var imageName = await _fileService.SaveFileAndGenerateName(request.ImageFile, Directories.ProductImages);
 

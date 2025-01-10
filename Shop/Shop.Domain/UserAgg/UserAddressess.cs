@@ -52,7 +52,7 @@ namespace Shop.Domain.UserAgg
             ActiveAddress = true;
         }
 
-        public void Guard(string shire, string city, string postalCode, string postalAddress, string phoneNumber,
+        private void Guard(string shire, string city, string postalCode, string postalAddress, string phoneNumber,
             string name, string family, string nationalCode)
         {
             NullOrEmptyDomainDataException.CheckString(shire, nameof(shire));

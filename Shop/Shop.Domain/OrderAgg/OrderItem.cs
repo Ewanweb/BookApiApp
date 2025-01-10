@@ -55,7 +55,7 @@ namespace Shop.Domain.OrderAgg
         }
 
 
-        public void PriceGuard(int newPrice)
+        private void PriceGuard(int newPrice)
         {
             if(newPrice < 1)
             {
@@ -63,7 +63,7 @@ namespace Shop.Domain.OrderAgg
             }
         }
 
-        public void CountGuard(int newCount)
+        private void CountGuard(int newCount)
         {
             if (newCount < 1)
             {

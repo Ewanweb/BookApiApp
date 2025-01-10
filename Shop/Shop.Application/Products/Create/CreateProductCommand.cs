@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace Shop.Application.Products.Create
 {
-    public record CreateProductCommand : IBaseCommand
+    public record AddProductImageCommand : IBaseCommand
     {
-        public CreateProductCommand(string title, IFormFile imageFile, string description, long categoryId, long subCategoryId, long secondorySubCategoryId, string slug, SeoData seoData, Dictionary<string, string> specification)
+        public AddProductImageCommand(string title, IFormFile imageFile, string description, long categoryId, long subCategoryId, long secondorySubCategoryId, string slug, SeoData seoData, Dictionary<string, string> specification)
         {
             Title = title;
             ImageFile = imageFile;

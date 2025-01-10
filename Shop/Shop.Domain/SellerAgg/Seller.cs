@@ -79,7 +79,7 @@ namespace Shop.Domain.SellerAgg
             Inventories.Remove(currentInventory);
         }
 
-        public void Guard(string shopName, string nationalCode)
+        private void Guard(string shopName, string nationalCode)
         {
             NullOrEmptyDomainDataException.CheckString(shopName, nameof(shopName));
             NullOrEmptyDomainDataException.CheckString(nationalCode, nameof(nationalCode));

@@ -4,9 +4,9 @@ using FluentValidation;
 
 namespace Shop.Application.Products.Create
 {
-    public class EditProductCommandValidator : AbstractValidator<CreateProductCommand>
+    public class AddProductImageCommandValidator : AbstractValidator<AddProductImageCommand>
     {
-        public EditProductCommandValidator()
+        public AddProductImageCommandValidator()
         {
             RuleFor(r => r.Title)
                 .NotEmpty().NotNull().WithMessage(ValidationMessages.required("عنوان"));
