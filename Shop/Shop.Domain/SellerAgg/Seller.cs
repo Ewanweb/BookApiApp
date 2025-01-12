@@ -45,13 +45,14 @@ namespace Shop.Domain.SellerAgg
             LastUpdate = DateTime.Now;
         }
 
-        public void Edit(string shopName, string nationalCode, ISellerDomainService domainService)
+        public void Edit(string shopName, SellerStatus status, string nationalCode, ISellerDomainService domainService)
         {
             Guard(shopName, nationalCode);
             if (domainService.NationalCodeExistInDataBase(nationalCode))
                 throw new InvalidDomainDataException("کد ملی متعلق به شخص دیگری است");
             ShopName = shopName;
             NationalCode = nationalCode;
+            Status = status;
         }
 
         public void AddInventory(SellerInventory inventory)
@@ -64,26 +65,14 @@ namespace Shop.Domain.SellerAgg
             Inventories.Add(inventory);
         }
 
-        public void EditInventory(SellerInventory newInventory)
-        {
-            var currentInventory = Inventories.FirstOrDefault(f => f.Id == newInventory.Id);
-
-            if (currentInventory == null)
-                throw new NullOrEmptyDomainDataException("محصول یافت نشد");
-
-            Inventories.Remove(currentInventory);
-            Inventories.Add(newInventory);
-        }
-
-        public void DeeleteInventory(long inventoryId)
+        public void EditInventory(long inventoryId, int count, int price, int? discountprecentage)
         {
             var currentInventory = Inventories.FirstOrDefault(f => f.Id == inventoryId);
 
             if (currentInventory == null)
                 throw new NullOrEmptyDomainDataException("محصول یافت نشد");
-
-
-            Inventories.Remove(currentInventory);
+            //TODO Check Inventory
+            currentInventory.Edit(count, price, discountprecentage);
         }
 
         private void Guard(string shopName, string nationalCode)
