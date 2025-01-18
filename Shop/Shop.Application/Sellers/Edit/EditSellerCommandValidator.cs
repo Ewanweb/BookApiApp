@@ -8,10 +8,10 @@ namespace Shop.Application.Sellers.Edit
     {
         public EditSellerCommandValidator()
         {
-            RuleFor(r => r.ShopName)
+            RuleFor(r => r.shopName)
                 .NotEmpty().WithMessage(ValidationMessages.required("نام فروشگاه"));
 
-            RuleFor(r => r.NationalCode)
+            RuleFor(r => r.nationalCode)
                 .NotEmpty().WithMessage(ValidationMessages.required("کد ملی")).ValidNationalId();
         }
     }

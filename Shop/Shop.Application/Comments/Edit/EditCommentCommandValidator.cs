@@ -1,7 +1,7 @@
 using FluentValidation;
 using Common.Application.Validation;
 
-namespace Shop.Application.Categories.Edit
+namespace Shop.Application.Comments.Edit
 {
     public class EditCommentCommandValidator : AbstractValidator<EditCommentCommand>
     {
@@ -9,7 +9,7 @@ namespace Shop.Application.Categories.Edit
         {
             RuleFor(r => r.Text)
                 .NotNull()
-                .MinimumLength(5).WithMessage(ValidationMessages.minLength("Text",5));
+                .MinimumLength(5).WithMessage(ValidationMessages.minLength("Text", 5));
         }
     }
 }

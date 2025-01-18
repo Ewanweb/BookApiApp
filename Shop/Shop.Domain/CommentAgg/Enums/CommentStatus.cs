@@ -1,4 +1,4 @@
-namespace Shop.Domain.CommentAgg
+namespace Shop.Domain.CommentAgg.Enums
 {
     public enum CommentStatus
     {

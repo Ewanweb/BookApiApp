@@ -12,17 +12,27 @@ namespace Shop.Domain.UserAgg
 {
     public class User : AggregateRoot
     {
-        public User(string name, string familly, string phoneNumber, string email, string password,
-            Gender gender, IDomainUserservice domainService)
+        private User()
         {
-            Guard(phoneNumber, email, domainService);
+
+        }
+        public User(string name, string family, string phoneNumber, string email,
+            string password, Gender gender, IDomainUserservice userDomainService)
+        {
+            Guard(phoneNumber, email, userDomainService);
 
             Name = name;
-            Familly = familly;
+            Familly = family;
             PhoneNumber = phoneNumber;
             Email = email;
             Password = password;
             Gender = gender;
+            Avatar = "avatar.png";
+            IsActive = true;
+            Roles = new();
+            Wallets = new();
+            Addressess = new();
+            Tokens = new();
         }
 
         public string Name { get; private set; }
@@ -35,6 +45,10 @@ namespace Shop.Domain.UserAgg
 
         public string Password { get; private set; }
 
+        public string Avatar { get; private set; }
+
+        public bool IsActive { get; set; }
+
         public Gender Gender { get; private set; }
 
         public List<UserRole> Roles { get; private set; }
@@ -42,6 +56,8 @@ namespace Shop.Domain.UserAgg
         public List<Wallet> Wallets { get; private set; }
 
         public List<UserAddressess> Addressess { get; private set; }
+        public List<UserToken> Tokens { get; }
+
 
         public void Edit(string name, string familly, string phoneNumber, string email, Gender gender, IDomainUserservice domainService)
         {
@@ -52,10 +68,16 @@ namespace Shop.Domain.UserAgg
             Email = email;
             Gender = gender;
         }
-
-        public static User RegisterUser(string phoneNumber,string email, string password, IDomainUserservice domainService)
+        
+        public void ChangePassword(string newPassword)
         {
-            return new User("", "", phoneNumber, email,password,Gender.None, domainService);
+            NullOrEmptyDomainDataException.CheckString(newPassword, nameof(newPassword));
+
+            Password = newPassword;
+        }
+        public static User RegisterUser(string phoneNumber, string password, IDomainUserservice userDomainService)
+        {
+            return new User("", "", phoneNumber, null, password, Gender.None, userDomainService);
         }
 
         public void AddAddress(UserAddressess addressess)
@@ -74,6 +96,35 @@ namespace Shop.Domain.UserAgg
             Addressess.Add(addressess);
         }
 
+        public void SetImage(string image)
+        {
+            if (image == null)
+                image = "avatar.png";
+
+            Avatar = image;
+        }
+        
+        public void AddToken(string hashJwtToken, string hashRefreshToken, DateTime tokenExpireDate, DateTime refreshTokenExpireDate, string device)
+        {
+            var activeTokenCount = Tokens.Count(c => c.RefreshTokenExpireDate > DateTime.Now);
+            if (activeTokenCount == 3)
+                throw new InvalidDomainDataException("امکان استفاده از 4 دستگاه همزمان وجود ندارد");
+
+            var token = new UserToken(hashJwtToken, hashRefreshToken, tokenExpireDate, refreshTokenExpireDate, device);
+            token.UserId = Id;
+            Tokens.Add(token);
+        }
+        
+        public string RemoveToken(long tokenId)
+        {
+            var token = Tokens.FirstOrDefault(f => f.Id == tokenId);
+            if (token == null)
+                throw new InvalidDomainDataException("invalid TokenId");
+
+            Tokens.Remove(token);
+            return token.HashJwtToken;
+        }
+        
         public void DeleteAddress(long addressId)
         {
             var oldAddress = Addressess.FirstOrDefault(f => f.Id == addressId);
@@ -83,8 +134,9 @@ namespace Shop.Domain.UserAgg
             Addressess.Remove(oldAddress);
         }
 
-        public void chargeWallet(Wallet wallet)
+        public void ChargeWallet(Wallet wallet)
         {
+            wallet.UserId = Id;
             Wallets.Add(wallet);
         }
 
@@ -94,7 +146,19 @@ namespace Shop.Domain.UserAgg
             Roles.Clear();
             Roles.AddRange(roles);
         }
+        
+        public void SetActiveAddress(long addressId)
+        {
+            var currentAddress = Addressess.FirstOrDefault(f => f.Id == addressId);
+            if (currentAddress == null)
+                throw new NullOrEmptyDomainDataException("Address Not found");
 
+            foreach (var address in Addressess)
+            {
+                address.SetDeActive();
+            }
+            currentAddress.SetActive();
+        }
 
         private void Guard(string phoneNumber, string email, IDomainUserservice domainservice)
         {

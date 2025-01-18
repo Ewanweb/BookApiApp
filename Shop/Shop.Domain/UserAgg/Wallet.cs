@@ -17,6 +17,7 @@ namespace Shop.Domain.UserAgg
             IsFinally = isFinally;
             Type = type;
             FinallyDate = finallyDate;
+            
         }
 
         public long UserId { get; internal set; }

@@ -2,7 +2,7 @@ using Common.Application;
 using Shop.Domain.CommentAgg;
 using Shop.Domain.CommentAgg.Repository;
 
-namespace Shop.Application.Comments.Create
+namespace Shop.Application.Comments.ChangeStatus
 {
     public class ChangeCommentStatusCommandHandler : IBaseCommandHandler<ChangeCommentStatusCommand>
     {
@@ -16,7 +16,7 @@ namespace Shop.Application.Comments.Create
         public async Task<OperationResult> Handle(ChangeCommentStatusCommand request, CancellationToken cancellationToken)
         {
             var Comment = await _repository.GetTracking(request.Id);
-            if(Comment == null)
+            if (Comment == null)
                 return OperationResult.NotFound();
 
             Comment.ChangeStatus(request.Status);

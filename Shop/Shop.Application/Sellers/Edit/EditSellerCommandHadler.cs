@@ -17,11 +17,11 @@ namespace Shop.Application.Sellers.Edit
 
         public async Task<OperationResult> Handle(EditSellerCommand request, CancellationToken cancellationToken)
         {
-            var seller = await _repository.GetTracking(request.Id);
+            var seller = await _repository.GetTracking(request.id);
             if (seller == null)
                 return OperationResult.NotFound();
 
-            seller.Edit(request.ShopName, request.NationalCode, _domainService);
+            seller.Edit(request.shopName, request.sellerStatus, request.nationalCode, _domainService);
             await _repository.Save();
             return OperationResult.Success();
         }

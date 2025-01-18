@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Common.Domain;
 using Common.Domain.Exceptions;
+using Shop.Domain.CommentAgg.Enums;
 
 namespace Shop.Domain.CommentAgg
 {
