@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Domain", "Common\Com
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Application", "Common\Common.Application\Common.Application.csproj", "{7732EA6D-4160-477C-A0F6-5554A532B7FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Query", "Common.Query\Common.Query.csproj", "{9CF11CFE-0ABA-4C38-834A-402FBDC70647}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{7732EA6D-4160-477C-A0F6-5554A532B7FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7732EA6D-4160-477C-A0F6-5554A532B7FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7732EA6D-4160-477C-A0F6-5554A532B7FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CF11CFE-0ABA-4C38-834A-402FBDC70647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CF11CFE-0ABA-4C38-834A-402FBDC70647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CF11CFE-0ABA-4C38-834A-402FBDC70647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CF11CFE-0ABA-4C38-834A-402FBDC70647}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,5 +73,6 @@ Global
 		{46B4BFB2-CB9C-4C19-B3CB-2E1190C42D0B} = {D7E59328-4A4A-4042-BB2E-2408FBC158BD}
 		{D949C6B1-C36D-4FAB-A55C-66169044C5A1} = {6B254BDD-6FB7-4D9D-8E43-DC9C9AAC96F9}
 		{7732EA6D-4160-477C-A0F6-5554A532B7FE} = {6B254BDD-6FB7-4D9D-8E43-DC9C9AAC96F9}
+		{9CF11CFE-0ABA-4C38-834A-402FBDC70647} = {6B254BDD-6FB7-4D9D-8E43-DC9C9AAC96F9}
 	EndGlobalSection
 EndGlobal
