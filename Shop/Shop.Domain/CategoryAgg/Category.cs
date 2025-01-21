@@ -45,7 +45,7 @@ namespace Shop.Domain.CategoryAgg
             });
         }
 
-        public void Guard(string title, string slug, ICategoryDomainService categoryDomainService)
+        private void Guard(string title, string slug, ICategoryDomainService categoryDomainService)
         {
             NullOrEmptyDomainDataException.CheckString(title, nameof(title));
             NullOrEmptyDomainDataException.CheckString(slug, nameof(slug));

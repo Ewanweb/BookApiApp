@@ -22,6 +22,22 @@ namespace Shop.Domain.OrderAgg
         public int TotalPrice => Price * Count;
 
 
+        public void  IncreaseCount(int count)
+        {
+            Count += count;
+        }
+
+        public void  DecreaseCount(int count)
+        {
+            if(Count == 1)
+                return;
+                
+            if(Count - count <= 0)
+                return;
+
+            Count -= count;
+        }
+
         public void ChangeCount(int newCount)
         {
             CountGuard(newCount);
@@ -39,7 +55,7 @@ namespace Shop.Domain.OrderAgg
         }
 
 
-        public void PriceGuard(int newPrice)
+        private void PriceGuard(int newPrice)
         {
             if(newPrice < 1)
             {
@@ -47,7 +63,7 @@ namespace Shop.Domain.OrderAgg
             }
         }
 
-        public void CountGuard(int newCount)
+        private void CountGuard(int newCount)
         {
             if (newCount < 1)
             {

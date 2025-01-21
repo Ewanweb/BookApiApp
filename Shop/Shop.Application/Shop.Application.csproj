@@ -6,4 +6,32 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Products\RemoveImage\**" />
+    <Compile Remove="Products\RemoveImage - Copy\**" />
+    <EmbeddedResource Remove="Products\RemoveImage\**" />
+    <EmbeddedResource Remove="Products\RemoveImage - Copy\**" />
+    <None Remove="Products\RemoveImage\**" />
+    <None Remove="Products\RemoveImage - Copy\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Products\RemoveImage\RemoveProductImageCommand.cs" />
+    <Compile Include="Products\RemoveImage\RemoveProductImageCommandHandler.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\Shop.Domain\Shop.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Sellers\ChangeStatus\" />
+    <Folder Include="Users\AddAddress\" />
+    <Folder Include="Users\ChargeWallet\" />
+    <Folder Include="Users\DeleteAddress\" />
+    <Folder Include="Users\EditAddress\" />
+    <Folder Include="Users\Register\" />
+  </ItemGroup>
+
 </Project>
