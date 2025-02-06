@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Comments\" />
-    <Folder Include="Orders\" />
+    <Folder Include="Orders\GetById\" />
     <Folder Include="Products\" />
     <Folder Include="Roles\" />
     <Folder Include="Sellers\" />
